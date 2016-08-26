@@ -1,0 +1,155 @@
+om sharano mallanna
+<html>
+	<head>
+		<title> Crud Application</title>
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<script src="angular.min.js"></script>
+	</head>
+<body>
+<div ng-app="myApp" ng-controller="myController">
+	<form class="form-horizontal" role="form" ">
+
+		<table class="table table-striped table-bordered">
+			<tr>
+				<td style="width: 181px;">
+				<label>Student ID<label>
+				</td>
+				<td>
+				<input type="text" ng-model=" newcontact.ID "required>
+				</td>
+			<tr>
+				<td style="width: 181px;">
+				<label>Student Name<label>
+				</td>
+				<td>
+				<input type="text" ng-model=" newcontact.Name "required>
+				</td>
+			</tr>	
+				<td style="width: 181px;">
+				<label>Student Email<label>
+				</td>
+				<td>
+				<input type="email" ng-model=" newcontact.Email "required>
+				</td>
+			<tr>	
+				<td style="width: 181px;">
+				<label>Student Phoneno<label>
+				</td>
+				<td>
+				<input type="text" ng-model=" newcontact.Phoneno "required>
+				</td>
+			</tr>
+				<td style="width: 181px;">
+				<label>Student Age<label>
+				</td>
+				<td>
+				<input type="text" ng-model=" newcontact.Age "required>
+				</td>
+			<tr>	
+				<td style="width: 181px;">
+				<label>Student Dept<label>
+				</td>
+				<td>
+				<input type="text" ng-model="newcontact.Dept "required>
+				</td>
+			</tr>
+			<tr>
+			
+			<td>
+			<input type="hidden" ng-model="newcontact" />
+			</td>
+			<td>
+			<input type="submit" style="width: 81px;"value="save"ng-click="addRow();"class="btn btn-primary" >
+			</td>
+			</tr>
+		</table>
+<table><tr><td style="width: 181px;"><label>Search</label></td><td><input  ng-model="abc"></td></tr></table>
+<table class="table table-striped table-bordered">
+	<thead><tr>
+		<th>Student ID</th>
+		<th>Student Name</th>
+		<th>Student Email</th>
+		<th>Student Phoneno</th>
+		<th>Student Age</th>
+		<th>Student Dept</th>
+		<th>Action</th>
+		<th>Delete</th>
+	</tr></thead>
+<tbody>
+<tr ng-repeat="student in contacts|filter:abc">
+	<td>{{student.ID}}</td>
+	<td>{{student.Name}}</td>
+	<td>{{student.Email}}</td>
+	<td>{{student.Phoneno}}</td>
+	<td>{{student.Age}}</td>
+	<td>{{student.Dept}}</td>
+	<td ><input type="button"value="edit"ng-click="edit(student)"class="btn-primary" required></td>
+	<td ><input type="button"value="delete" ng-click="delete(student.Name);"class="btn-success"></td>
+</tr>
+</tbody>
+	
+</table>
+	</form>
+</div>
+<script>
+var myApp = angular.module('myApp', []);
+myApp.controller("myController",function($scope){
+
+$scope.contacts=[{
+		
+		'ID':'101',
+		'Name':'prakash',
+		'Email':'prakashuppu@yahoo.in',
+		'Phoneno':'91660642094',
+		'Age':'25',
+		'Dept':'pharmacology'},
+		
+		{
+
+		'ID':'102',
+		'Name':'shravan',
+		'Email':'sravashuppu@yahoo.in',
+		'Phoneno':'91654484494',
+		'Age':'29',
+		'Dept':'pharmaceutics'},
+		{
+		
+		'ID':'103',
+		'Name':'sudheer',
+		'Email':'sodheershuppu@yahoo.in',
+		'Phoneno':'916484494',
+		'Age':'26',
+		'Dept':'pharmacognacy'},
+		{
+		
+		'ID':'104',
+		'Name':'sonika',
+		'Email':'sonika@yahoo.in',
+		'Phoneno':'914544494',
+		'Age':'9',
+		'Dept':'ECE'},];
+
+$scope.edit = function (student) {
+		
+        $scope.newcontact = angular.copy(student);
+    }
+$scope.addRow = function () {
+		
+        $scope.contacts.push ($scope.newcontact);
+		$scope.newcontact={'ID':'$scope.ID','Name':'$scope.Name','Email':'$scope.Email',
+		'Phoneno':'$scope.Phoneno','Age':'$scope.Age','Dept':'$scope.Dept'};
+		}	;
+$scope.delete = function(Name) {
+            for(i in $scope.contacts) {
+            if($scope.contacts[i].Name == Name) {
+                $scope.contacts.splice(i,1);
+                $scope.newcontact = {};
+            }
+        }
+        
+    }
+	
+});
+</script>
+</body>
+</html>
